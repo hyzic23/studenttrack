@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service    //This allowas spring to create an instance of this at runtime and also does DI in other classes as required
+@Service
+//@Component    //This allows spring to create an instance of this at runtime and also does DI in other classes as required
+
+//This allowas spring to create an instance of this at runtime and also does DI in other classes as required
 public class LocationServiceImpl implements LocationService {
 
     @Autowired

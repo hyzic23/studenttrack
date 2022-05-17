@@ -1,0 +1,36 @@
+package com.twentythree.serviceImpl;
+
+import com.twentythree.util.EmailUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Component;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+@Component  // This tells spring that this should be scanned and an object of this particular bean should be created at runtime and spring will create it and we can inject it into other classes
+public class EmailUtilImpl implements EmailUtil {
+
+    //@Autowired
+    JavaMailSender sender;
+
+    @Override
+    public void sendEmail(String toAddress, String subject, String body) {
+        MimeMessage message = sender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+        try
+        {
+            helper.setTo(toAddress);
+            helper.setSubject(subject);
+            helper.setText(body);
+        }
+        catch (MessagingException ex)
+        {
+            ex.printStackTrace();
+        }
+
+
+        sender.send(message);
+    }
+}
